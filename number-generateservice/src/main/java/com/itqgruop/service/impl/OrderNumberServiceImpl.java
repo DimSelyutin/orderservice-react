@@ -32,8 +32,11 @@ public class OrderNumberServiceImpl implements OrderNumberService {
         String orderNumber;
         boolean isUnique;
 
+        String datePart = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
         do {
-            orderNumber = String.format("%05d", random.nextInt(100000));
+            String randomPart = String.format("%05d", random.nextInt(100000));
+            orderNumber = datePart + randomPart;
             log.info("Method generateUniqueOrderNumber - generatedNumber: {}", orderNumber);
 
             try {
@@ -46,7 +49,7 @@ public class OrderNumberServiceImpl implements OrderNumberService {
 
         OrderNumber newOrderNumber = new OrderNumber(orderNumber, LocalDateTime.now(), LocalDateTime.now());
         return mongoOrderNumberRepository.save(newOrderNumber);
-
     }
+
 
 }
