@@ -1,37 +1,11 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - 'POSTGRES_DB=orderservice_db'
-      - 'POSTGRES_PASSWORD=orderservice_pwd'
-      - 'POSTGRES_USER=orderservice'
-    ports:
-      - '5432:5432'
-    restart: 'always'
-    healthcheck:
-      test: [ "CMD-SHELL", "sh -c 'pg_isready -U orderservice -d orderservice_db'" ]
-
-  orderservice:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - 'DB_URL=jdbc:postgresql://postgres/orderservice_db'
-      - 'DB_USERNAME=orderservice'
-      - 'DB_PASSWORD=orderservice_pwd'
-      - 'ORDER_NUMBER_API_URL=http://localhost:8081/api/v1/numbers'
-    depends_on:
-      postgres:
-        condition: service_healthy
   # Служба для сборки приложения React
   frontend:
     build:
       context: .
-      dockerfile: ./order-react/Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - ./src:/app/src  # Подключаем локальную папку с исходным кодом для горячей перезагрузки (опционально)
     ports:
