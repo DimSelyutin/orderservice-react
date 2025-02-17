@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: generatorservice
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: false
+  data:
+    mongodb:
+      uri: mongodb://root:example@mongo:27017/ordernumber_db?authSource=admin
+      authentication-database: admin
+      database: ordernumber_db

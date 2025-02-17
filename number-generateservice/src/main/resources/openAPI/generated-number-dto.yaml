@@ -1,0 +1,23 @@
+components:
+  schemas:
+    GeneratedNumberDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "Уникальный идентификатор сгенерированного номера"
+        orderNumber:
+          type: string
+          description: "Сгенерированный номер заказа"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Дата и время создания"
+        updatedAt:
+          type: string
+          format: date-time
+          description: "Дата и время последнего обновления"
+      required:
+        - id
+        - orderNumber
+        - createdAt

@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Order Number Service
+  description: API для генерации уникальных номеров заказов
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Локальный сервер
+paths:
+  /numbers:
+    get:
+      summary: Получить уникальный номер заказа
+      operationId: getOrderNumber
+      responses:
+        '200':
+          description: Успешный ответ с уникальным номером заказа
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratedNumberDTO'
+        '500':
+          description: Ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+components:
+  schemas:
+    ErrorDto:
+      $ref: './error-dto.yaml#/components/schemas/ErrorDto'
+    GeneratedNumberDTO:
+      $ref: './generated-number-dto.yaml#/components/schemas/GeneratedNumberDTO'
+
