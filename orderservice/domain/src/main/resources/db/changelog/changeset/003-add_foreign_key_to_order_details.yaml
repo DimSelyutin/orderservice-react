@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: your_name
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: order_details
+            baseColumnNames: order_id
+            constraintName: fk_order_details_orders  # Указано имя ограничения
+            referencedTableName: orders
+            referencedColumnNames: id
+            constraints:
+              onDelete: CASCADE
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: order_details
+            constraintName: fk_order_details_orders  # Используем то же имя для отката
