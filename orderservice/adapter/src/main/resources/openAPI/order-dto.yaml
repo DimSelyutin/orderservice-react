@@ -1,0 +1,39 @@
+components:
+  schemas:
+    OrderDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        orderNumber:
+          type: string
+          example: "ORD123456"
+        totalAmount:
+          type: number
+          format: double
+          example: 100.50
+        orderDate:
+          type: string
+          format: date
+          example: "2023-10-01"
+        recipient:
+          type: string
+          example: "Иван Иванов"
+        deliveryAddress:
+          type: string
+          example: "Москва, ул. Пушкина, д. 1"
+        paymentType:
+          type: string
+          example: "Кредитная карта"
+        deliveryType:
+          type: string
+          example: "Курьером"
+      required:
+        - orderNumber
+        - totalAmount
+        - orderDate
+        - recipient
+        - deliveryAddress
+        - paymentType
+        - deliveryType

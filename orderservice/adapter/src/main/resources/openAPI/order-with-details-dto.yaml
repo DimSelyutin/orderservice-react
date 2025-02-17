@@ -1,0 +1,65 @@
+components:
+  schemas:
+    OrderWithDetailDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор заказа
+        orderNumber:
+          type: string
+          description: Номер заказа
+        totalAmount:
+          type: number
+          format: float
+          description: Общая сумма заказа
+        orderDate:
+          type: string
+          format: date
+          description: Дата заказа
+        recipient:
+          type: string
+          description: Получатель
+        deliveryAddress:
+          type: string
+          description: Адрес доставки
+        paymentType:
+          type: string
+          description: Тип оплаты
+        deliveryType:
+          type: string
+          description: Тип доставки
+        orderDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderDetailDto'
+          description: Список деталей заказа
+      required:
+        - id
+        - orderNumber
+        - totalAmount
+        - orderDate
+        - recipient
+
+    OrderDetailDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор детали заказа
+        productSku:
+          type: integer
+          description: SKU продукта
+        productName:
+          type: string
+          description: Название продукта
+        quantity:
+          type: integer
+          description: Количество продукта
+        unitPrice:
+          type: number
+          format: float
+          description: Цена за единицу
+        orderId:
+          type: integer
+          description: Внешний ключ для связи с заказом

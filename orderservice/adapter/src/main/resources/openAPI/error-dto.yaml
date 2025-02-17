@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: DTOs для Системных Ответов
+  description: Определение схем данных (DTO) для различных системных ответов.
+  version: 1.0.0
+paths: { }
+components:
+  schemas:
+    ErrorDto:
+      type: object
+      description: Ответное сообщение системы в случае ошибки
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+          description: Код ошибки
+        errorMessage:
+          type: string
+          description: Наименование ошибки
+        timestamp:
+          type: string
+          format: date-time
+          description: Время возникновения ошибки
+      required:
+        - errorCode
+        - errorMessage
+        - timestamp

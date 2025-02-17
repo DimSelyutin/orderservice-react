@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    },
+    "esModuleInterop": true, // Добавьте эту строку
+    "skipLibCheck": true
+  },
+  "include": [
+    "src"
+  ]
+}

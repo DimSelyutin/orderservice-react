@@ -1,0 +1,253 @@
+openapi: 3.0.3
+
+info:
+  title: Сервис управления заказами
+  description: Сервис для создания, просмотра и редактирования заказов.
+  version: 1.0.0
+
+tags:
+  - name: Контроллер для операций с заказами
+
+paths:
+  /orders:
+    get:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Получение списка всех заказов
+      operationId: getAllOrders
+      responses:
+        '200':
+          description: Список заказов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+
+    post:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Создание нового заказа
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderWithDetailDto'
+      responses:
+        '201':
+          description: Заказ успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderWithDetailDto'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+
+  /orders/date/{date}/total/{total}:
+    get:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Получение заказа за заданную дату и больше заданной общей суммы заказа
+      operationId: getOrdersByDateAndTotal
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: total
+          in: path
+          required: true
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Заказы найдены
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderWithDetailDto'
+        '404':
+          description: Заказы не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+
+  /orders/exclude/{productName}:
+    get:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Получение списка заказов, не содержащих заданный товар и поступивших в заданный временной период
+      operationId: getOrdersExcludingProduct
+      parameters:
+        - name: productName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Заказы найдены
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderWithDetailDto'
+        '404':
+          description: Заказы не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+  /orders/{id}:
+    get:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Получение заказа по ID
+      operationId: getOrderById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Заказ найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderWithDetailDto'
+        '404':
+          description: Заказ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+
+    put:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Обновление существующего заказа
+      operationId: updateOrder
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderWithDetailDto'
+      responses:
+        '200':
+          description: Заказ успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDto'
+        '404':
+          description: Заказ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+
+    delete:
+      tags:
+        - Контроллер для операций с заказами
+      summary: Удаление заказа по ID
+      operationId: deleteOrder
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Заказ успешно удален
+        '404':
+          description: Заказ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDto'
+components:
+  schemas:
+    ErrorDto:
+      $ref: './error-dto.yaml#/components/schemas/ErrorDto'
+    OrderDto:
+      $ref: './order-dto.yaml#/components/schemas/OrderDto'
+    OrderWithDetailDto:
+      $ref: './order-with-details-dto.yaml#/components/schemas/OrderWithDetailDto'
