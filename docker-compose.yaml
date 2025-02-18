@@ -50,13 +50,23 @@ services:
       - postgres
       - numberservice
 
-  order-react:
+  frontend:
     build:
-      context: ./order-react
+      context: ./order-react  # Обновленный путь к директории с Dockerfile
+      dockerfile: Dockerfile
+    volumes:
+      - ./order-react/src:/app/src  # Подключаем локальную папку с исходным кодом для горячей перезагрузки
     ports:
-      - "3000:3000"
-    depends_on:
-      - numberservice
+      - "3000:3000"  # Порт для доступа к приложению в режиме разработки
 
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"  # Порт для доступа к Nginx
+    volumes:
+      - ./order-react/nginx.conf:/etc/nginx/conf.d/default.conf  # Обновленный путь к файлу конфигурации
+      - ./order-react/build:/usr/share/nginx/html  # Обновленный путь к собранным файлам
+    depends_on:
+      - frontend
 volumes:
   mongo_data:

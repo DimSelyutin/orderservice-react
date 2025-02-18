@@ -27,23 +27,3 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-  # Служба для сборки приложения React
-  frontend:
-    build:
-      context: .
-      dockerfile: ./order-react/Dockerfile
-    volumes:
-      - ./src:/app/src  # Подключаем локальную папку с исходным кодом для горячей перезагрузки (опционально)
-    ports:
-      - "3000:3000"  # Порт для доступа к приложению в режиме разработки
-
-  # Служба для обслуживания приложения с помощью Nginx
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"  # Порт для доступа к Nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Подключаем файл конфигурации Nginx
-      - ./build:/usr/share/nginx/html  # Подключаем собранные файлы в Nginx
-    depends_on:
-      - frontend  # Указываем зависимость от сервиса frontend
