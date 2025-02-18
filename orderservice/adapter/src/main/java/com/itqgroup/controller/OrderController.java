@@ -5,7 +5,6 @@ import com.itqgroup.openapi.api.OrdersApi;
 import com.itqgroup.openapi.model.OrderDto;
 import com.itqgroup.openapi.model.OrderWithDetailDto;
 import io.swagger.v3.oas.annotations.Parameter;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

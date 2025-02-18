@@ -15,7 +15,7 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: mongo
+    container_name: mongo-orderservice
     ports:
       - "27017:27017"
     volumes:

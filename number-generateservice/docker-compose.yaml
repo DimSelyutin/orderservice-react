@@ -12,7 +12,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
-  numberservice:
+  numberservice-inner:
     build: .
     container_name: numberservice
     ports:

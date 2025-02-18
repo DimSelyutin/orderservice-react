@@ -13,7 +13,7 @@ services:
     healthcheck:
       test: [ "CMD-SHELL", "sh -c 'pg_isready -U orderservice -d orderservice_db'" ]
 
-  orderservice:
+  orderservice-inner:
     build:
       context: .
       dockerfile: Dockerfile
