@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
  */
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {

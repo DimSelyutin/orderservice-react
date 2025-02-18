@@ -8,12 +8,13 @@ import com.itqgroup.service.OrderService;
 import com.itqgroup.service.client.OrderNumberClient;
 import com.itqgroup.util.OrderNumberResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
@@ -40,8 +41,12 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Order createOrder(Order order) {
+        log.debug("createOrder - start, order: {}", order);
         OrderNumberResponse orderNumberResponse = orderNumberClientl.fetchOrderNumber();
+        log.debug("createOrder - orderNumberResponse: {}", orderNumberResponse);
+
         order.setOrderNumber(orderNumberResponse.orderNumber());
+        log.debug("createOrder - changed order: {}", order);
 
         return orderRepository.save(order);
     }

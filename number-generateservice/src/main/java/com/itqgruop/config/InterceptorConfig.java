@@ -1,4 +1,4 @@
-package com.itqgroup.config;
+package com.itqgruop.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

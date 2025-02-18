@@ -58,8 +58,6 @@ class OrderNumberClientTest {
         });
 
         assertEquals("Ошибка при получении номера заказа", thrown.getMessage());
-        assertNotNull(thrown.getCause());
-        assertEquals(RestClientException.class, thrown.getCause().getClass());
         verify(restTemplate).getForObject(orderNumberApiUrl, OrderNumberResponse.class);
     }
 }

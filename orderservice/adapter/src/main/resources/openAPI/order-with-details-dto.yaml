@@ -47,9 +47,9 @@ components:
         id:
           type: integer
           description: Уникальный идентификатор детали заказа
-        productSku:
+        productArticle:
           type: integer
-          description: SKU продукта
+          description: Article продукта
         productName:
           type: string
           description: Название продукта

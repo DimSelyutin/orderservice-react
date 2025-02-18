@@ -4,16 +4,13 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DB_URL:jdbc:postgresql://localhost:5432/orderservice_db}
-    username: ${DB_USERNAME:orderservice_admin}
-    password: ${DB_PASSWORD:orderservice_password}
+    username: ${DB_USERNAME:orderservice}
+    password: ${DB_PASSWORD:orderservice_pwd}
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
   jpa:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-eureka:
-  instance:
-    prefer-ip-address: true
 management:
   endpoints:
     enabled-by-default: false
@@ -28,4 +25,4 @@ order:
       url: http://localhost:8081/api/v1/numbers
 logging:
   level:
-    liquibase: DEBUG
+    root: debug
